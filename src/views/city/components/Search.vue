@@ -3,10 +3,9 @@
     <input
       type="text"
       class="search-input"
-      name=""
       placeholder="请输入城市或拼音"
       v-model="searchVal"
-      @input="handleInput">
+      @input="handleInput" />
   </div>
 </template>
 

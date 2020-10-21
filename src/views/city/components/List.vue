@@ -46,8 +46,8 @@ export default {
   watch: {
     letter() {
       if (this.letter) {
-        const element = this.$ref[this.letter] && this.$ref[this.letter][0];
-        console.log(element);
+        const element = this.$refs[this.letter] && this.$refs[this.letter][0];
+        element.scrollIntoView();
       }
     }
   },

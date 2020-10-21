@@ -10,7 +10,8 @@
     <div class="city-list">
       <div class="city-wrap"
         v-for="(item, key) of cities"
-        :key="key">
+        :key="key"
+        :ref="key">
         <h5 class="title">{{key}}</h5>
         <div class="item-list"
           v-for="city in item"
@@ -31,6 +32,10 @@ export default {
     cities: {
       type: Object,
       default: () => {}
+    },
+    letter: {
+      type: String,
+      default: ''
     }
   },
   computed: {
@@ -38,6 +43,17 @@ export default {
       currentCity: 'city'
     })
   },
+  watch: {
+    letter() {
+      if (this.letter) {
+        const element = this.$ref[this.letter] && this.$ref[this.letter][0];
+        console.log(element);
+      }
+    }
+  },
+  mounted() {
+
+  }
 }
 </script>
 

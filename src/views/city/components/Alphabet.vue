@@ -2,7 +2,8 @@
   <ul class="alphabet">
     <li
       v-for="alphabet of alphabets"
-      :key="alphabet">
+      :key="alphabet"
+      @click="handleLetterClick">
       {{alphabet}}
     </li>
   </ul>
@@ -15,6 +16,12 @@ export default {
     alphabets: {
       type: Array,
       default: () => []
+    }
+  },
+  methods: {
+    handleLetterClick(event) {
+      const val = event.target.innerText;
+      this.$emit('letterChange', val);
     }
   }
 }

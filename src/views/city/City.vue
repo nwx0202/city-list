@@ -3,9 +3,13 @@
     <Search @handleInput="handleSearch">
     </Search>
     <List
-      :cities="cities">
+      :cities="cities"
+      :letter="letter">
     </List>
-    <Alphabet :alphabets="alphabets"></Alphabet>
+    <Alphabet
+      :alphabets="alphabets"
+      @letterChange="letterChange">
+    </Alphabet>
   </div>
 </template>
 
@@ -24,7 +28,8 @@ export default {
   data() {
     return {
       cities: {},
-      alphabets: []
+      alphabets: [],
+      letter: ''
     }
   },
   mounted() {
@@ -46,6 +51,11 @@ export default {
         }
       });
     },
+
+    // 字母定位
+    letterChange(val) {
+      this.letter = val;
+    }
   }
 }
 </script>

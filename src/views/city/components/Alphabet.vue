@@ -53,7 +53,7 @@ export default {
         // 获取移动时的位置
         const moveY = event.touches[0].clientY || event.touches[0].pageY;
         // 移动的高度 - 字母A到顶部的距离 = 当前字母的高度 20是每个字母的高度
-        const index = Math.floor((moveY - this.starY) / 20);
+        const index = Math.floor((moveY - this.starY) / 18);
         if (index >= 0 && index <= this.alphabets.length) {
           this.activeLetter = this.alphabets[index];
           this.activeLetterY = this.$refs.A[0].offsetTop + index * 18;
@@ -74,12 +74,12 @@ export default {
 <style lang="scss">
 .alphabet {
   position: fixed;
-  top: 3.3rem;
-  right: .1rem;
+  top: 3rem;
+  right: .2rem;
 
   li {
     color: #00bcd4;
-    line-height: .41rem;
+    line-height: .37rem;
   }
 }
 .active-letter {

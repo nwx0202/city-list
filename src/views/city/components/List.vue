@@ -7,16 +7,19 @@
       </div>
     </div>
 
-    <div class="city-list">
-      <div class="city-wrap"
-        v-for="(item, key) of cities"
-        :key="key"
-        :ref="key">
-        <h5 class="title">{{key}}</h5>
-        <div class="item-list"
-          v-for="city in item"
-          :key="city.id">
-          <div class="item">{{city.name}}</div>
+    <div class="city-list" ref="wrapper">
+      <div>
+        <div class="city-wrap"
+          v-for="(item, key) of cities"
+          :key="key"
+          :ref="key">
+          <h5 class="title">{{key}}</h5>
+          <div class="item-list"
+            v-for="city in item"
+            :key="city.id"
+            @click="handleCityClick(city.name)">
+            <div class="item">{{city.name}}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -24,7 +27,8 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapActions, mapState} from 'vuex'
+import BScroll from 'better-scroll'
 
 export default {
   name: 'List',
@@ -47,17 +51,38 @@ export default {
     letter() {
       if (this.letter) {
         const element = this.$refs[this.letter] && this.$refs[this.letter][0];
-        element.scrollIntoView();
+        this.scroll.scrollToElement(element);
       }
     }
   },
   mounted() {
-
-  }
+    if (!this.scroll) {
+      this.scroll = new BScroll(this.$refs.wrapper, {
+        click: true
+      });
+    } else {
+      this.scroll.refresh();
+    }
+  },
+  methods: {
+    handleCityClick(cityName) {
+      this.changeCity(cityName);
+      // this.scroll.scrollToElement(this.$refs.wrapper);
+    },
+    ...mapActions(['changeCity'])
+  },
 }
 </script>
 
 <style lang="scss" scope>
+.city-list {
+  position: absolute;
+  top: 2.3rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
 .current-wrap {
   padding: .16rem .2rem;
 

@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <Search @handleInput="handleSearch">
+    <Search
+      @handleInput="handleSearch"
+      :results="results">
     </Search>
     <List
       :cities="cities"
@@ -29,7 +31,9 @@ export default {
     return {
       cities: {},
       alphabets: [],
-      letter: ''
+      letter: '',
+      results: [],
+      timer: null
     }
   },
   mounted() {
@@ -39,7 +43,17 @@ export default {
   methods: {
     // 查询方法
     handleSearch(val) {
-      console.log(val);
+      if (val.length) {
+        let result = [];
+        for(const i in this.cities) {
+          this.cities[i].forEach(city => {
+            if (city.spell.indexOf(val) > -1 || city.name.indexOf(val) > -1) {
+              result.push(city);
+            }
+          });
+        }
+        this.results = result;
+      }
     },
 
     // 获取城市数据

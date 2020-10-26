@@ -67,7 +67,6 @@ export default {
   methods: {
     handleCityClick(cityName) {
       this.changeCity(cityName);
-      // this.scroll.scrollToElement(this.$refs.wrapper);
     },
     ...mapActions(['changeCity'])
   },
